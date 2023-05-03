@@ -1,8 +1,8 @@
-//Some quick notes:
-//1: SERIKO does NOT support same line comments. If you want to write a comment, ALWAYS PUT IT ON ITS OWN LINE. If you put comments after other bits of code in the same line, it may seem to work at first, but it can cause cryptic errors down the line. Save yourself the trouble. Always put comments on their own lines in here. Additionally, it doesn't do block comments with /* and */
-//2: The example blink code is set up with the new definition, which I recommend you use. Here is my guide to what that means: https://zichqec.github.io/s-the-skeleton/olddef_vs_newdef
-//If you want to use old definition, make sure to erase that 'version,1' bit.
-//3: It is very common for people to feel stuck on how to start, because they don't know what expressions to make without having dialogue, but they don't know what dialogue to write without having expressions. If you're feeling that way, I highly suggest using emoji as substitutes just to get you started! That may sound weird if you're not fond of emoji, but seriously, just give it a try. I've found that just writing a few messages in Discord and using the emoji to signify surface changes is a great help to get me past that initial hump where it feels impossible.
+//Сначала, заметки:
+//1: SERIKO НЕ поддерживает комментарии на одну и ту же строчку. Если хочешь комментировать - ВСЕГДА ПОСТАВИТЬ ЕГО НА СВОЮ ЛИНИЮ. Если это не делаешь - тебе в начале показаться, что все работает нормальным, но после некоторое время, возникают ошибки. Просто это не делайте. Тоже, напомните что комменти /* как это */ не работает.
+//2: Пример код для моргание настроено с новое определение, которое я рекомендую. Вот моё гайд, на что это значить: https://zichqec.github.io/s-the-skeleton/olddef_vs_newdef
+//если хочешь старое определение, удалить код 'version,1'.
+//3: Вообщем, люди не знают как начинать, потому что не понимают, которые выражения нужны без диалог, но и не знают как написать диалог без выражения. Если в эти люди включая и ты, я очень рекомендую использовать эмоджи вместо выражения, только для начала! Может быть, это звучит странно, если не любишь эмоджи, но ещё: поспробуйте это. Я узнала что когда написала сообщение в дискорд, используя эмоджи вместо изменение выражения, это очень помогло, особенно в начале, когда все чувствует невозвожно.
 
 
 descript
@@ -10,22 +10,22 @@ descript
 	version,1
 }
 
-//—————————————————————————————— Sakura surfaces ——————————————————————————————
+//—————————————————————————————— Поверхности Сакура ——————————————————————————————
 
 surface0
 {
-	collision,0,0,130,65,head
+	collision,0,0,130,65,голова
 	
-	//Example code for blink animation - uncomment if you want it
+	//Код для анимации моргание. Закомментировайте чтобы использовать
 	//animation0.interval,random,4
 	//animation0.pattern1,overlay,101,0,0,0
 	//animation0.pattern2,overlay,102,100,0,0
 	//animation0.pattern3,overlay,-1,50,0,0
 }
 
-//—————————————————————————————— Kero surfaces ——————————————————————————————
+//—————————————————————————————— Поверхности Керо ——————————————————————————————
 
 surface10
 {
-	collision,0,0,130,65,head
+	collision,0,0,130,65,голова
 }

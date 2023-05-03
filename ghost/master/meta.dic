@@ -1,17 +1,17 @@
-//This file handles a couple little QOL functions you may want. But these are not necessary! If you don't care for them just erase them. If you don't want to set up network updates, you can comment or remove the update functions too. If you're not interested in any of these, just remove the whole file!
+//в этот файл некоторые функции, которые сделают жизни легче, но они не необходимо! Если не нравятся они, просто удалить им. Если не хочешь настроить обновление по сети, можешь удалить или закомментировать ими, тоже. Если ни в чём не интересно, просто удалить этот ж файл
 
-//—————————————————————————————— Installing something ——————————————————————————————
+//—————————————————————————————— установление ——————————————————————————————
 OnInstallComplete
 {
-	"\0\s[0]Installed a %(reference0),\w4 called %(reference1)."
+	"\0\s[0]установлен %(referencе0), по название %(reference1)."
 	--
-	if "ghost" _in_ reference0 //A little menu to open or change to the ghost that was installed immediately
+	if "ghost" _in_ reference0 //Меню, чтобы срочно сменить или вызывать привидение
 	{
 		"\n\n\_q"
 		--
-		"\![*]\__q[OnInstallComplete.Action,call]Call %(reference0)\__q  \![*]\__q[OnInstallComplete.Action,change]Change to %(reference0)\__q\n\n"
+		"\![*]\__q[OnInstallComplete.Action,call]вызывать %(reference0)\__q  \![*]\__q[OnInstallComplete.Action,change]сменить на %(reference0)\__q\n\n"
 		--
-		"\![*]\q[Thanks,]"
+		"\![*]\q[спасибо,]"
 	}
 }
 
@@ -28,12 +28,12 @@ OnInstallComplete.Action
 }
 
 
-//—————————————————————————————— Creating a .nar file ——————————————————————————————
+//—————————————————————————————— создание .NAR ——————————————————————————————
 OnNarCreated
 {
-	_nar = "\_a[OnNarLocation,""%(reference1)""]%(reference0)\_a" //Makes a clickable link that'll open the location of the file they just made
+	_nar = "\_a[OnNarLocation,""%(reference1)""]%(reference0)\_a" //создает ссылка, которая будет открыть место файл, который было только что создано
 	
-	"\0\s[0]Successfully created %(_nar)."
+	"\0\s[0]успешно создано %(_nar)."
 }
 
 OnNarLocation
@@ -44,57 +44,56 @@ OnNarLocation
 }
 
 
-//—————————————————————————————— Network Update ——————————————————————————————
-//Starting an update
+//—————————————————————————————— обновление по сети ——————————————————————————————
+//начало обновления
 OnUpdateBegin
 {
-	"\0\s[0]Checking for updates.\w8"
+	"\0\s[0]проверка обновлении.\w8"
 }
 
-//reference0 is the number of new files, starting from 0
+//reference0 - число новых файлов, начиная с 0
 OnUpdateReady
 {
-	reference0++ //Number of files starts from 0, so this displays the correct amount
+	reference0++ //число новых файлов начинает с 0, так что это показывает правильное число.
 	
-	//plural checks, adds an s and changes is to are if there's more than 1 file
-	_s = ""; _are = "is"; if reference0 != 1; _s = "s"; _are = "are"
+	//Проверка многое число, добавыть 'и' если есть больше чем один файл (заметка от переводчик: есть способ показывать 'файлов' как надо, но это - легче. извините...)
+	_и =""; if reference1 != 1; _и = "и"
 	
-	"\0\s[0]There %(_are) %(reference0) new file%(_s).\w8"
+	"\0\s[0]Есть %(reference0) файл%(и).\w8"
 }
 
-//When the update finishes. Don't forget to initialize any new variables you've created! I highly highly recommend using OnInitialize for this (it's in boot.dic), in case the user updates via the ghost explorer or some other means.
-//reference0 is 'none' if there were no new files to update with, reference1 is a list of new file names, separated by commas
+//когда закончить обновления, не забываите инициализировать новые переменние! Я очень рекомендую тебе использовать OnInitialize (в Boot.dіс), если бы пользователь обновили в меню искатель привидении или что-то.
+//если нет новых файлов для обновлении, reference0 - 'none'. reference1 - список назвий новые файли расставаны с запятой
 OnUpdateComplete
 {
 	if reference0 == "none"
 	{
-		"\0\s[0]There are no new files."
+		"\0\s[0]нет новых файл."
 	}
 	else
 	{
-		"\0\s[0]Update complete."
+		"\0\s[0]успешно обновлен."
 	}
 }
-
-//reference0 is the reason the update failed
-OnUpdateFailure //If the update fails
+//reference0 - причин обновление не было успешно
+OnUpdateFailure //Если обновление не было успешно
 {
-	if reference0 == "timeout" //If it timed out
+	if reference0 == "timeout" //Если истекло время ожидания
 	{
-		"\0\s[0]Connection timed out."
+		"\0\s[0]истекло время ожидания."
 	}
-	elseif reference0 == "md5 miss" //If the update files have not been uploaded correctly and don't match the updates2.dau
+	elseif reference0 == "md5 miss" //Если файли были неправильно загрузено, а не совпадают с updates 2. dau
 	{
-		_file = SPLITPATH(reference1)[2] + SPLITPATH(reference1)[3] //This gets the name and extension of the offending file
+		_файл = SPLITPATH(reference1)[2] + SPLITPATH(reference1)[3] //это узнает название и расширение у файла
 		
-		"\0\s[0]The MD5 values don't match.\w8 Contact the ghost author and let them know that '%(_file)' is giving an MD5 error."
+		"\0\s[0]не совпадают значения MD5.\w8 сообщить автор привидении адайте им знать, что у '%(_файл)' есть ошибка MD5."
 	}
-	elseif reference0 == "artificial" //If the user cancels the update by double clicking the balloon
+	elseif reference0 == "artificial" //Если пользователь отменить обновление при двойнее нажатие поле с текстом
 	{
-		"\0\s[0]Update cancelled."
+		"\0\s[0]обновление отмено."
 	}
-	else //Any other errors
+	else //Другие ошибки
 	{
-		"\0\s[0]Error while updating:\w4 ""%(reference0)""."
+		"\0\s[0]ошибка во время обновления:\w4 ""%(reference0)""."
 	}
 }

@@ -1,23 +1,23 @@
-A simple ghost template, with the philosophy that content is what matters most, and side functions can come later if you want/need them.
-There's not much here; just a simple menu setup with talk rate adjustment. The ghost will take your username from what you have in the SSP preferences, and it will base your pronouns on what you have the "sex" option set to ("Undefined" will use they). It will also figure out your birthday from there.
-Note that just about everything in this template, aside from the files in the yaya_base folder, is optional! If you don't want that particular thing in your ghost, you can probably just erase it or comment it out! Don't be afraid to try stuff.
+Простой шаблон привидении, с филосифием что содержание - важнее для все, а остальные фукций можешь создать только если хочешь им.
+Здесь не очень много вещей - только простой меню с настройки для время разговоров. Привидение узнает твое имя от того, что поставили в настройки ССП, а местоимение от "пол" ("Ничто" значит что оно использовает "Они"). Тоже узнает твой день рождния там.
+Понимайте, что почти все в этот шаблон, выключая файли в папка yaya_base, обходимо! Если не хочешь или этот или тот вещь, можешь его удалить или покомментировать! Не бойся попробовать новые вещи.
 
-My eternal thanks to Ayakamtka for translating the config.dic to English!
+Бесконечное спасибо Ayakamtka для перевод config.dic в английском языке!
 
 
 
-——— Three very important notes ———
+——— Три очень важные заметки ———
 
-1: If you are using github to host your network updates, DO NOT use a github.io url with this template. The _loading_order.txt file in the yaya_base directory will cause a 404 error because of the underscore at the start of its name. Use a raw.githubusercontent link instead, it's better for multiple reasons.
+1: Если используешь github для обновление, НЕ ИСПОЛЬЗОВАЙ url github.io с этот шаблон. Файл _loading_order.txt в папка yaya_base будет получать ошибку 404, потому что в начале название есть "_". Вместо этого, использовай ссылка raw.githubusercontent - есть несколько причин, почему она лучше.
 
-2: This template has a simple Emergency Mode set up. This means that if there is an error in your dic files, it will load *just* the files in yaya_base and emerg.dic, and nothing else. This is so that errors can be output to the error log without necessarily needing the debugger Tama! I do recommend Tama, but this makes life a little easier. If you want to customize which files load, you can do that in yaya_emerg.txt
+2: У этого шаблона есть простой Режим Чрезвычайное Положение. Значить, что если у тебя есть ошибку в файлов .dic, оно будет загрузить *только* файли, которые есть в папку yaya_base, и emerg.dic - нет ничего еще! Это потому что ошибки может поставить в лог ошибок, без нужда отладчик Тама. Я все еще порекомендую Тама, но этот способ делает жизни легче. Если хочешь изменить которые файли оно будет загрузить, это сделано в yaya_emerg.txt
 
-3: This template does NOT use Select.options! Instead, if you click on a menu choice and the linked function's name doesn't start with On, it'll direct to OnChoiceSelect. See Ukadoc for more details. https://ukagakadreamteam.github.io/ukadoc/manual/list_sakura_script.html#_q_%E3%82%BF%E3%82%A4%E3%83%88%E3%83%AB,ID_
+3: Этот шаблон НЕ использует «Select.настройки»! Вместо этого, при нажатии на функции, который не начинает с "On", это перенавлавить к OnChoiceSelect. Посмотри на Укадок, чтобы узнать больше. https://ukagakadreamteam.github.io/ukadoc/manual/list_sakura_script.html#_q_%E3%82%BF%E3%82%A4%E3%83%88%E3%83%AB,ID_
 https://ukagakadreamteam.github.io/ukadoc/manual/list_shiori_event.html#OnChoiceSelect
 
-If you want to use Select.options, add this snip of code somewhere:
+Если хочешь использовать функции Select.настройки, вставить этот код где-либо:
 
-//This bit of code is what makes menu options that don't start with On direct to Select.options instead. Remove or comment it if you prefer!
+//Этот код для перенаправление функции в меню, которые не начинает с "On" к Select.настройки. Удалить или закомментировать, если хочешь!
 OnChoiceSelect
 {
     EVAL("Select.%(reference0)")
@@ -25,38 +25,41 @@ OnChoiceSelect
 
 
 
-——— If you are completely new to this ———
+——— Если ты совсем новички ———
 
-A quick rundown so you have the gist of how to read these files. This is what a SHIORI event looks like:
+Быстрый объяснение что ты можешь читать эти файли. Это как выглядит событие SHIORI:
 
 OnMouseDoubleClick
 {
-	//Some code in here
+	//код будет здесь
 }
 
-There is a name, then some brackets, and code inside of it. You'll see also that the name starts with "On". If the name does NOT start with "On", it's probably a normal function. But if it has "On", you should look it up on Ukadoc to see what it does! Here's the page for SHIORI events:
+Есть название, тогда скобки, а внутри ими - код. Название тоже начинает с "On". Если с этом НЕ начинает, это, наверное, обычная функция. Но с "On", было бы добрая идея найти его на Укадок! Вот страница для событие SHIORI:
 https://ukagakadreamteam.github.io/ukadoc/manual/list_shiori_event.html
 
-Ctrl + F is your friend here. If you can't find the name on that page, then it is very likely to be a custom SHIORI event. In that case, you should use Ctrl + F in NotePad++ (or whatever editor you're using) to try and find other instances of the name in the ghost's files. If using NotePad++, the "Find in Files" option is really handy for this, especially if you set it to only search through .dic files.
+Здесь, Ctrl + F - твой друг. Если название не найдено на ту страницу, очень возможно, что оно специальное событие SHIORI. В тот случай, используйте Ctrl + F в Notepad++ (или любое редактор код) чтобы найти другие места в код, где событие использовано. Если работаешь в Notepad++, настроек "Найти в Файли" тут очень полезно, особо если настроен только шукать по файлов .dic
 
-In this case, you are likely to find the name of the SHIORI event inside of Sakura Script tags, such as menu choices like \q[Settings,OnConfigMenu], or raise tags like \![raise,OnSomeEvent]. You can read more about Sakura Script tags here:
+Обычно, будешь видеть название событие внутри тегов SakuraScript, например, выбори меню как в[Настройки,OnConfigMenu], или тегов поднимание, как ![raise,OnКакоеТоСобытие]. Читайте больше про теги SakuraScript здесь:
 https://ukagakadreamteam.github.io/ukadoc/manual/list_sakura_script.html
 
-Ukadoc will take you far. It is the official documentation for SSP. For official YAYA documentation, see the AYAYA wiki. Specifically, this page is a list of all the built in functions:
+Укадок даёт тебе очень много информация. Она - официальная документация SSP. (Документация YAYA - Вики AYAYA). Эта ж страница - список все включены функции:
 https://emily.shillest.net/ayaya/index.php?%E3%83%9E%E3%83%8B%E3%83%A5%E3%82%A2%E3%83%AB/%E9%96%A2%E6%95%B0%E7%94%A8%E9%80%94%E5%88%A5%E4%B8%80%E8%A6%A7
 
-If you'd like to learn to code in YAYA, there is an in-depth English guide here, which starts with the very basics:
+Если хочешь изучить как программировать в YAYA, есть подробное руководство (в английском) здесь, который начинает с самое простое:
 https://zichqec.github.io/YAYA_Fundamentals/
 
-There is also a general walkthrough for making ghosts that you may find helpful, but note that it is made with a different (and much larger) template in mind:
+Тоже есть общее руководство, который может быть полезно к тебе, но понимайте, что это было создано с другой (и очень большее!) шаблон в виду:
 http://ashido.com/ukagaka/
 
 
 
-This template is free to use to create whatever ghost you like, no need to credit me for it. If you'd like to see more by me, I can be found here:
+С этому шаблону, можешь создать любое привидение, без приписивание. Ты можешь узнать больше о то что я делаю здесь:
 https://zichqec.github.io/s-the-skeleton/
 
-That's it, have fun!
+Вот и всё! Удачи и счастливого время!
 
 Simplicity Template v1.0.2, using YAYATc571-5.
 https://github.com/Zichqec/simplicity_template
+
+Перевод из SmokyCinnamonRoll (Лёва):
+https://smokycinnamon.github.io/indifferentsorrel/index.html

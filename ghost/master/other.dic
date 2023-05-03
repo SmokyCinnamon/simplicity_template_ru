@@ -2,24 +2,24 @@ OnTranslate
 {
 	_talk = reference0
 	
-	//This is what makes %(embedded_elements) work in script input
-	if reference1 == "" && reference2 == "" //If this is from the input box
-	{ //send input box : no event (ref2) , no special flag (ref1)
+	//это то, что дозволит %(встроенные_элементи) работать в ввод скрипта
+	if reference1 == "" && reference2 == "" //если это происходит от ввод скрипта
+	{ //отправить вод скрипта : нет событии (ref2) , нет флаг (ref1)
 		_talk = EVAL('"' + REPLACE(_talk,'"','""') + '"')
 	}
 	
-	//If you want to add anything to OnTranslate, like text replacement, I would put it after this point, generally. Just make sure it's before the TOSTR(_talk)
+	//если есть что-нибудь добавить к OnTranslate, например, замена текст, я бы поставила его после этой точки. просто проверить, что он перед код TOSTR(_talk)
 	
 	TOSTR(_talk)
 }
 
-//This is just here so you can use anchors to link to websites if you want. You can link to websites with normal menu choice tags! If you do, a handy URL preview will show up in the balloon!
+//это просто здесь, что ты можешь ссылковать веб-сайти как якорь, но обычные выбори меню ещё работает! Если так сделаешь, полезный просмотр будет в поле с текстом
 OnAnchorSelect
 {
 	if "http://" _in_ reference0 || "https://" _in_ reference0; "\j[""%(reference0)""]"
 }
 
-//Hotkeys
+//горячие клавищи
 OnKeyPress
 {
 	if reference0 == "f1"; "\![open,readme]"
@@ -27,36 +27,36 @@ OnKeyPress
 	elseif reference0 == "r"; OnLastTalk
 }
 
-//Happens about 30 seconds after a script ends, by default, to bring them back to normal poses
+//происходит примерно 30 секундов после конца скрипт, чтобы вернуть им к нормальные позы
 OnSurfaceRestore
 {
 	"\1\s[10]\0\s[0]"
 }
 
-//Network update url. Make sure you have a / on the end of the url or it will give a warning every time users try to update! If you don't plan to use network updates you can remove this
-//IF YOU'RE USING GITHUB FOR NETWORK UPDATES: DO NOT USE github.io URLS! It will cause you pain and suffering. USE raw.githubusercontent!!!
-//To get the raw.githubusercontent link super easy:
-//• Open your ghost's repo online
-//• navigate to the ghost's folder (the top level one, with install.txt, readme.txt, etc)
-//• Click on install.txt, or another text file on that level
-//• Once on that page, click the "raw" button. You should see the url now starts with raw.githubusercontent
-//• Copy that url exactly as is, but *leave off the "install.txt" or whatever file name at the end.*
-//Tada! That's your url! Make sure you test it! The dev palette and script/network log can help with that
+//URL обновление по сети. Проверьте, что в концом есть /, иначе это даёт предупреждение перед обновлении! Если не будешь настроить обновления, удалить это
+//если используешь github: НЕ ИСПОЛЬЗУЙ URL-И github.iо! Это даёт тебе только боль и страдание. используй raw.githubusercontent!!!
+//чтобы очень легко найти ссылку:
+//• открыть свой репо в сети
+//• перейти в папка привидении (первый этал, с install.txt, readme.txt, и.т.д)
+//• нажмите на любой файл .txt
+//• на тую страницу, нажмите кнопку "raw". теперь ссылка должа начинать с raw.githubusercontent
+//• скопировуйте ссылку вот так и есть, только без название файл в конце
+//Тадам! Вот свою ссылку! Тестировуйте её! с этом поможет Палитра разработчика, и лог скрипт/сети
 On_homeurl
 {
 	""
 }
 
 
-//—————————————————————————————— Right click menu links ——————————————————————————————
+//—————————————————————————————— ссылки меню нажатие правой кнопкой ——————————————————————————————
 
-//Takes an array of alternating names and urls, and formats them for use with the right click menu
+//форматировать массив попеременные названия и URL-и для использование с меню правой кнопки
 FormatLinks : all
 {
 	for _i = 0; _i < ARRAYSIZE(_argv); _i++
 	{
-		_argv[_i] //Add the link/title
-		//Alternate between adding %ASC(1) or %ASC(2)
+		_argv[_i] //добавить ссылка / название
+		//переменнить с %ASC(1) до %ASC(2)
 		if _i % 2 == 1; "%ASC(2)"
 		else; "%ASC(1)"
 	}
@@ -67,10 +67,10 @@ On_sakura.recommendsites
 	FormatLinks(recommendsites_sakura)
 }
 
-//These are the websites linked in the top option of the sakura's right click menu. The format is simple; write the label of the link on the left followed by a semicolon, and then on the right, the url to link to. These should be separate strings.
+//это веб-сайти, ссылкованы в самый верхный настроек меню правой кнопкой у сакуры. формат - простой, налево написать название ссыка, тогда точка с запятой, а направо-ссылка. они должны быть другие строки.
 recommendsites_sakura : array
 {
-	"Link label";	"https://link.example.com/link/to/whatever/here/"
+	"название ссылка";	"https://link.example.com/link/to/whatever/here/"
 }
 
 On_sakura.portalsites 
@@ -78,11 +78,11 @@ On_sakura.portalsites
 	FormatLinks(portalsites_sakura)
 }
 
-//These are the websites linked in the second option of the sakura's right click menu. Same as above
+//Той самый вещь, но для вторая кнопка
 portalsites_sakura : array
 {
-	"Another link label";	"https://link.example.com/link/to/whatever/here/again/"
-	"A third link label";	"https://link.example.com/link/to/whatever/a/third/time/you/can/add/as/many/as/you/want/"
+	"другое название";	"https://link.example.com/link/to/whatever/here/again/"
+	"третье название";	"https://link.example.com/link/to/whatever/a/third/time/you/can/add/as/many/as/you/want/"
 }
 
 On_kero.recommendsites
@@ -90,78 +90,93 @@ On_kero.recommendsites
 	FormatLinks(recommendsites_kero)
 }
 
-//These are the websites linked in the first option of the kero's right click menu. Same as above
+//как меню сакура, но для керо
 recommendsites_kero : array
 {
-	"These labels can be anything you want";	"https://link.example.com/link/to/whatever/here/once/more/"
+	"эти названия может быть что угодно";	"https://link.example.com/link/to/whatever/here/once/more/"
 }
 
 
 //—————————————————————————————— User pronoun related ——————————————————————————————
-
-they
+//от переводчик: именительный 	родительный 	дательный 	творительный 	предложный
+они
 {
-	if SHIORI3FW.UserSex == "male"; "he"
-	elseif SHIORI3FW.UserSex == "female"; "she"
-	else; "they"
+	if SHIORI3FW.UserSex == "male"; "он"
+	elseif SHIORI3FW.UserSex == "female"; "она"
+	else; "они"
 }
 
-them
+их
 {
-	if SHIORI3FW.UserSex == "male"; "him"
-	elseif SHIORI3FW.UserSex == "female"; "her"
-	else; "them"
+	if SHIORI3FW.UserSex == "male"; "его"
+	elseif SHIORI3FW.UserSex == "female"; "её"
+	else; "их"
 }
 
-their
+им
 {
-	if SHIORI3FW.UserSex == "male"; "his"
-	elseif SHIORI3FW.UserSex == "female"; "her"
-	else; "their"
+	if SHIORI3FW.UserSex == "male"; "ему"
+	elseif SHIORI3FW.UserSex == "female"; "ей"
+	else; "им"
 }
 
-theirs
+ими
 {
-	if SHIORI3FW.UserSex == "male"; "his"
-	elseif SHIORI3FW.UserSex == "female"; "hers"
-	else; "theirs"
+	if SHIORI3FW.UserSex == "male"; "им"
+	elseif SHIORI3FW.UserSex == "female"; "ей"
+	else; "ими"
 }
 
-themself
+ними
 {
-	if SHIORI3FW.UserSex == "male"; "himself"
-	elseif SHIORI3FW.UserSex == "female"; "herself"
-	else; "themself"
+	if SHIORI3FW.UserSex == "male"; "ним"
+	elseif SHIORI3FW.UserSex == "female"; "ней"
+	else; "ними"
 }
 
-//%(they) %(p('are','is'))
-//You can change the name of this function if you want! I kept it short so it's fast to type
-p
+них
 {
-	if SHIORI3FW.UserSex == "undef"; _argv[0] //they are
-	else; _argv[1] //he is/she is
+	if SHIORI3FW.UserSex == "male"; "нём"
+	elseif SHIORI3FW.UserSex == "female"; "ней"
+	else; "них"
+}
+
+сами
+{
+	if SHIORI3FW.UserSex == "male"; "сам"
+	elseif SHIORI3FW.UserSex == "female"; "сама"
+	else; "сами"
+}
+
+//%(они) дела%(м('ли','л','ла'))
+//можешь изменить имя этой функций! просто корото, потому что таким образом быстрее написать ему
+м
+{
+	if SHIORI3FW.UserSex == "undef"; _argv[0] //они делает
+	elseif SHIORI3FW.UserSex == "male"; _argv[1] //он делает
+	else; _argv[2] //она делает
 }
 
 /*
 
-An example of the above setup:
-"%(they) %(p('were','was')) looking for that earlier, I'll ask if %(they)'%('ve','s') found it."
+Пример:
+"%(они) бы%м('ли', 'л', 'ла')) в поисках того. буду спросить, если еще не на%(м('шли','шёл','шла '))."
 
-If using they, the %(p) functions will return the first word specified, resulting in:
-"they were looking for that earlier, I'll ask if they've found it."
+при пользование они, функции %(м) будет отдать первое определённое слово
+"они были в поисках того. буду спросить, если ещё не нашли."
 
-If not using they, for example if using she, it will return the second specified word instead, resulting in:
-"she was looking for that earlier, I'll ask if she's found it."
+при пользование, например, она, отдает третье слово:
+"она была в поисках того. буду спросить, если ещё не нашла."
 
-With this function, you can quickly customize words that need to change based on whether it should be singular or plural. Just remember; the %(p) function is set up so that the first word you specify matches with the 'they' labels used on the pronoun functions. You can always switch that around if you like, too.
+с этому функцию можешь быстро изменить конца словами, только напомните: она настроена, что первое слово всегда с местоимение "они" как в названием. но, это можно изменить
+(заметка от переводчик: нужно % (м) для винетельный падеж, потому что он... и есть. Поспробуйте пишить без местоимения...)
 
 */
-
-//Copied from the base SHIORI files, but with the username variable added
+скопирован с файли SHIORI, с добавление переменная имя
 OnNotifyUserInfo : void
 {
 	SHIORI3FW.UserName = reference[0]
-	username = reference[0]
+	имя = reference[0]
 	SHIORI3FW.UserNameFull = reference[1]
 	SHIORI3FW.UserBirthday = SPLIT(reference[2],',',3)
 	for _i = 0 ; _i < 3 ; _i++ {

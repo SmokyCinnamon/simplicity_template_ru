@@ -1,22 +1,22 @@
 OnFirstBoot
 {
-	//If you add variables, make sure to initialize them here!
-	//Note - I haven't added anything about username or pronouns here because it's all handled by the SSP prefs
+	//Если добавляешь переменние, напомните иннициализировать им здесь!
+	//Заметка: Я ничего не добавил по тему имя пользователя или местоимение, потому что все это узнаю от настройки SSP.
 	stroke = 0
 	LastTalk = ""
 	
-	"\1\s[10]\0\s[0]Hello, and welcome to the Simplicity Template, %(username).\w8 As the name implies, this template is very simple.\w8 You will notice there is not much here.\w8 That's on purpose!\w8 This template's primary goal is to make ghost creation less intimidating.\w8 You really need almost nothing to make a ghost;\w4 a basic shell with some interesting randomtalk can be an incredible and fun experience.\w8 So all those boring functions to do with email checking and such?\w8 Not here, unless you decide you want to add them.\w8 Don't let tedious functions tire you out before you can finish your ghost!\w8 Make something simple and fun, or start small and expand upon it later!\w8 Embrace the freedom of simplicity!"
+	"\1\s[10]\0\s[0]Привет, а добро пожаловать в Простой Шаблон, %(имя).\w8 Как название скажет, этот шаблон - очень простой.\w8 Ты будешь заметить, что здесь - мало вещей.\w8 Это нормально!\w8 Цель этого шаблона - сделать создание привидении меньше страшное.\w8 В реальности, не нужен так много, чтобы сделать привидение.\w4 Например, простой внешний вид с интересной диалог может быть очень весёлый опыт.\w8 Так вот, знаешь все те скучные функции как "проверка почты" и.т.д?\w8 У шаблона нет таких. (Если не создаешь позже).\w8 Не позволит скучным функциям занять все твое время перед того, как можешь закончить привидения!\w8 Сделай что-то простой и весёлый, или начинай с что-то маленький и добавляйте на нём позже!\w8 Обнимайте свободу простота!"
 }
 
 OnInitialize
 {
-	//If you want some variables to reset on boot, put them here. This event will happen even if you add other events like OnGhostChanged
+	//если хочешь, что переменние сброшены на загрузки, поставить им тут. Событие происходить даже если добавляешь что-то как OnGhostChanged или подобные.
 	
-	//If you add new variables in updates, I recommend initializing them like so:
-	//if !ISVAR("NewVariable"); NewVariable = 0
-	//This means that it will only set the new variable if the user doesn't already have it, so that their variables don't get overwritten
+	//Для новые переменние в обновление, лучше пишите вот так:
+	//if !ISVAR("НоваяПеременная"); НоваяПеремення = 0
+	//Это значить, что если у пользователя уже есть эту переменную, она не будет сброшено.
 	
-	if reference0 != "reload" //For things you want to reset EXCEPT when just reloading; a convenience for you the dev, basically
+	if reference0 != "reload" //Для вещи, которые хочешь сбросить ТОЛЬКО если не просто перезагрузишь. Что-то для тебя, разработчик, в основном.
 	{
 		LastTalk = ""
 	}
@@ -25,30 +25,30 @@ OnInitialize
 OnBoot
 {
 	_temp = SPLIT(SHIORI3FW.UserBirthday,":")
-	_user_birthday = "%(_temp)[1]/%(_temp[2])" //M/D, if you want it D/M you can switch it around
-	_today = "%(_month)/%(_day)" //Again, switch this around if using D/M
+	_user_birthday = "%(_temp)[1]/%(_temp[2])" //М/Д, если хочешь Д/М, можешь переместить
+	_today = "%(_month)/%(_day)" //Переместите для Д/М
 	
 	"\1\s[10]\0\s[0]"
 	--
 	if _today == _user_birthday
 	{
-		"\0\s[0]It is %(username)'s birthday today.\w8 Happy birthday, %(username).\w8 Developer,\w4 you can add an interesting message here.\w8 It can be as long as you like.\w8 Or, you can remove it entirely."
+		"\0\s[0]Сегодня День Рождения %(имя).\w8 С днём рождения, %(имя).\w8 Разработчик,\w4 есть возможность добавить интересное сообщение здесь.\w8 Оно может быть любая длина.\w8 Или просто удалить ему."
 	}
-	elseif _today == "1/1" //You can add whatever cool dates you want with more elseifs here
+	elseif _today == "1/1" //можешь добавит любие дни тут с больше elseif-и
 	{
-		"\0\s[0]It's new year's day.\w8 Happy %(year),\w4 %(username)."
+		"\0\s[0]Это новый год.\w8 С %(year),\w4 %(имя)."
 	}
-	else //Normal boot
+	else //обычное загрузкаt
 	{
-		"\0\s[0]Hello %(username).\w8 Good to see you."
-		"\0\s[0]Hello.\w8 Ready to make something cool?"
+		"\0\s[0]Привет, %(имя).\w8 Добро тебя видеть."
+		"\0\s[0]Привет.\w8 Готов сделать что-то крутой?"
 	}
 }
 
 OnClose
 {
-	"\0\s[0]Farewell."
-	"\0\s[0]Goodbye."
+	"\0\s[0]До свидания."
+	"\0\s[0]Пока."
 	--
-	"\w8\w8\-" //This is what makes the ghost close (after a short pause), do not remove the \- , and MAKE SURE you don't use a \e before this point or it won't work
+	"\w8\w8\-" //Это то, что закрывает привидении (после короткую паузу). Не удаляйте \-, и БУДЬ УВЕРЕН что перед этой точкой не используешь \е - в тое случае это не работает!
 }
