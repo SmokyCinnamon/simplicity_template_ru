@@ -58,7 +58,7 @@ https://zichqec.github.io/s-the-skeleton/
 
 Вот и всё! Удачи и счастливого время!
 
-Simplicity Template v1.0.2, using YAYATc571-5.
+Simplicity Template v1.0.3, using YAYATc571-5.
 https://github.com/Zichqec/simplicity_template
 
 Перевод из SmokyCinnamonRoll (Лёва):

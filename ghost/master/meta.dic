@@ -11,7 +11,7 @@ OnInstallComplete
 		--
 		"\![*]\__q[OnInstallComplete.Action,call]вызывать %(reference0)\__q  \![*]\__q[OnInstallComplete.Action,change]сменить на %(reference0)\__q\n\n"
 		--
-		"\![*]\q[спасибо,]"
+		"\![*]\q[спасибо,пустой]"
 	}
 }
 

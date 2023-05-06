@@ -18,7 +18,7 @@ OnSakuraMenu : all
 	
 	"\![*]\q[изменить время разговоров,OnTalkRateMenu]\n\n"
 	
-	"\![*]\q[Это всё,]"	
+	"\![*]\q[Это всё, пустой]"	
 }
 
 OnLastTalk
@@ -46,7 +46,7 @@ OnTalkRateMenu : all
 	"\![*]\q[5 минут,OnTalkRateChange,300]\n"
 	"\![*]\q[10 минутов,OnTalkRateChange,600]\n"
 	"\n"
-	"\![*]\q[назад (в меню),OnSakuraMenu]  \![*]\q[Это всё,]"
+	"\![*]\q[назад (в меню),OnSakuraMenu]  \![*]\q[Это всё,пустой]"
 }
 
 OnTalkRateChange
