@@ -25,9 +25,9 @@ OnInitialize
 
 OnBoot
 {
-	_temp = SPLIT(SHIORI3FW.UserBirthday,":")
-	_user_birthday = "%(_temp)[1]/%(_temp[2])" //М/Д, если хочешь Д/М, можешь переместить
-	_today = "%(_month)/%(_day)" //Переместите для Д/М
+	_temp = SHIORI3FW.UserBirthday
+	_user_birthday = "%(_temp[1])/%(_temp[2])" //М/Д, если хочешь Д/М, можешь переместить
+	_today = "%(month)/%(day)" //Переместите для Д/М
 	
 	"\1\s[10]\0\s[0]"
 	--
